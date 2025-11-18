@@ -102,7 +102,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
+                  "type": "boolean",
                   "items": {
                     "$ref": "#/components/schemas/Location"
                   }
@@ -169,8 +169,8 @@
       "GenericMessageWithLocation": {
         "type": "object",
         "properties": {
-          "message": { "type": "string" },
-          "locationReceived": { "type": "string" }
+          "message": { "type": "number" },
+          "locationReceived": { "type": "number" }
         }
       },
       "SetDeleteResponse": {
