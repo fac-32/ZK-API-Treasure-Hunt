@@ -23,6 +23,7 @@
     "concat-map": "^0.0.1",
     "create-require": "^1.1.1",
     "diff": "^4.0.2",
+    "dotenv": "^17.2.3",
     "dynamic-dedupe": "^0.3.0",
     "express": "^5.1.0",
     "fill-range": "^7.1.1",
@@ -65,7 +66,9 @@
     "yn": "^3.1.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
