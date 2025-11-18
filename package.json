@@ -74,6 +74,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/fac-32/ZK-API-Treasure-Hunt/issues"
   },
