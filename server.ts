@@ -2,7 +2,6 @@ import express from "express";
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import path from "path";
 import destinations from "./destinations.json" with { type: 'json' };
 
 let locations = destinations
@@ -33,12 +32,10 @@ app.post('/InputLocation', (req, res) => {
 app.post('/SetDeleteLocation', async (req, res) => {
   DeleteLocation = req.body.RemoveLocation;
 
-  res.status(200).json({
+    res.status(200).json({
       message: "POST Request Called successfully",
       locationToRemove: DeleteLocation
   });
-
-  await fetch("/DeleteCountry"); // having problem here
 
 });
 
@@ -55,6 +52,19 @@ app.put('/UpdateLocation', (req, res) => {
 app.get("/Destinations", (request, response) => {
   response.json(locations);
 
+
+});
+
+app.get("/VacationDestinations", (request, response) => {
+
+  const VacationLength = locations.length - 1;
+  const RandomIndex = Math.floor(Math.random() * (VacationLength + 1));
+  const Vacation = locations[RandomIndex];
+
+      response.status(200).json({
+      message: "GET Request Called successfully",
+      Vacation: Vacation
+  });
 
 });
 
