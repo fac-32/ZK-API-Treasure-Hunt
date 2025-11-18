@@ -18,7 +18,8 @@ const __dirname = dirname(__filename);
 app.use(express.static(__dirname));
 app.use(express.json());
 
-var CurrentLocation = "";
+let CurrentLocation = "";
+let DeleteLocation = "";
 
 app.post('/InputLocation', (req, res) => {
   CurrentLocation = req.body.CurrentLocation;
@@ -27,6 +28,18 @@ app.post('/InputLocation', (req, res) => {
       message: "POST Request Called successfully",
       locationReceived: CurrentLocation
   });
+});
+
+app.post('/SetDeleteLocation', async (req, res) => {
+  DeleteLocation = req.body.RemoveLocation;
+
+  res.status(200).json({
+      message: "POST Request Called successfully",
+      locationToRemove: DeleteLocation
+  });
+
+  await fetch("/DeleteCountry"); // having problem here
+
 });
 
 app.put('/UpdateLocation', (req, res) => {
@@ -41,11 +54,17 @@ app.put('/UpdateLocation', (req, res) => {
 
 app.get("/Destinations", (request, response) => {
   response.json(locations);
+
+
 });
 
 app.delete('/DeleteCountry', (request, response)=>{
-  locations = locations.filter(location => location.country !== CurrentLocation)  
-  response.redirect('/Destinations')
+  locations = locations.filter(location => location.country !== DeleteLocation)  
+
+    response.status(200).json({
+      message: "DELETE Request Called successfully",
+      AvailableLocations: locations
+  });
 })
 
 app.listen(port, () => {
