@@ -1,6 +1,5 @@
 GET http://localhost:3000/Destinations
 
-
 ###
 
 POST http://localhost:3000/InputLocation HTTP/1.1
@@ -24,7 +23,7 @@ content-type: application/json
 DELETE http://localhost:3000/DeleteCountry HTTP/1.1
 content-type: application/json
 
-{
-    "name": "sample",
-    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
-}
+###
+
+GET http://localhost:3000/GetCurrentLocation HTTP/1.1
+content-type: application/json

@@ -32,6 +32,13 @@ app.post('/InputLocation', (req, res) => {
   });
 });
 
+app.get('/GetCurrentLocation', (req, res) => {
+  res.status(200).json({
+    message: "GET Request Called successfully",
+    locationReceived: CurrentLocation
+  })
+})
+
 app.post('/SetDeleteLocation', async (req, res) => {
   DeleteLocation = req.body.RemoveLocation;
 
@@ -54,8 +61,6 @@ app.put('/UpdateLocation', (req, res) => {
 
 app.get("/Destinations", (request, response) => {
   response.json(locations);
-
-
 });
 
 app.get("/VacationDestinations", (request, response) => {
@@ -71,8 +76,8 @@ app.get("/VacationDestinations", (request, response) => {
 
 });
 
-app.delete('/DeleteCountry', (request, response)=>{
-  locations = locations.filter(location => location.country !== DeleteLocation)  
+app.delete('/DeleteCountry', (request, response) => {
+  locations = locations.filter(location => location.name !== DeleteLocation)  
 
     response.status(200).json({
       message: "DELETE Request Called successfully",

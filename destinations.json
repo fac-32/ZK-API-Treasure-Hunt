@@ -1,10 +1,10 @@
 [
-  { "country": "Brazil" },
-  { "country": "Chile" },
-  { "country": "Italy" },
-  { "country": "Sweden" },
-  { "country": "Japan" },
-  { "country": "Laos" },
-  { "country": "Samoa" },
-  { "country": "New Zealand" }
+  { "name": "Brazil" },
+  { "name": "Chile" },
+  { "name": "Italy" },
+  { "name": "Sweden" },
+  { "name": "Japan" },
+  { "name": "Laos" },
+  { "name": "Samoa" },
+  { "name": "New Zealand" }
 ]
