@@ -1,0 +1,195 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "ZK-API-Treasure-Hunt",
+    "version": "1.0.0",
+    "description": "API for managing treasure-hunt destinations"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local server"
+    }
+  ],
+  "paths": {
+    "/InputLocation": {
+      "post": {
+        "summary": "Set current location (POST)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InputLocationPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Location received",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericMessageWithLocation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/SetDeleteLocation": {
+      "post": {
+        "summary": "Set the location to remove (triggers delete on server)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetDeletePayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Delete location set",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetDeleteResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/UpdateLocation": {
+      "put": {
+        "summary": "Update current location (PUT)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InputLocationPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Location updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericMessageWithLocation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Destinations": {
+      "get": {
+        "summary": "List available destinations",
+        "responses": {
+          "200": {
+            "description": "Array of destinations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Location"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/DeleteCountry": {
+      "delete": {
+        "summary": "Delete country previously set via /SetDeleteLocation",
+        "responses": {
+          "200": {
+            "description": "Deletion result and remaining locations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "InputLocationPayload": {
+        "type": "object",
+        "properties": {
+          "CurrentLocation": {
+            "type": "number",
+            "example": 12345
+          }
+        },
+        "required": ["CurrentLocation"],
+        "additionalProperties": false
+      },
+      "SetDeletePayload": {
+        "type": "object",
+        "properties": {
+          "RemoveLocation": {
+            "type": "string",
+            "example": "Spain"
+          }
+        },
+        "required": ["RemoveLocation"],
+        "additionalProperties": false
+      },
+      "Location": {
+        "type": "object",
+        "properties": {
+          "country": {
+            "type": "string",
+            "example": "France"
+          }
+        },
+        "required": ["country"],
+        "additionalProperties": true
+      },
+      "GenericMessageWithLocation": {
+        "type": "object",
+        "properties": {
+          "message": { "type": "string" },
+          "locationReceived": { "type": "string" }
+        }
+      },
+      "SetDeleteResponse": {
+        "type": "object",
+        "properties": {
+          "message": { "type": "string" },
+          "locationToRemove": { "type": "string" }
+        }
+      },
+      "DeleteResponse": {
+        "type": "object",
+        "properties": {
+          "message": { "type": "string" },
+          "AvailableLocations": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Location" }
+          }
+        }
+      }
+    }
+  }
+}

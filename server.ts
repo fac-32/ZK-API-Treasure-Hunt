@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import destinations from "./destinations.json" with { type: 'json' };
+import swaggerUi from "swagger-ui-express";
+import openapi from "./openapi.json" with { type: 'json' };
 
 let locations = destinations
 
@@ -16,6 +18,7 @@ const __dirname = dirname(__filename);
 
 app.use(express.static(__dirname));
 app.use(express.json());
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapi));
 
 let CurrentLocation = "";
 let DeleteLocation = "";
