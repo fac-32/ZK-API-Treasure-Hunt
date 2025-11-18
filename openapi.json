@@ -129,6 +129,23 @@
           }
         }
       }
+    },
+    "/VacationDestinations": {
+      "get": {
+        "summary": "Gets a random vacation destination via /VacationDestinations",
+        "responses": {
+          "200": {
+            "description": "GET Request Called successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetVacationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -189,7 +206,18 @@
             "items": { "$ref": "#/components/schemas/Location" }
           }
         }
+      },
+      "GetVacationResponse": {
+        "type": "object",
+        "properties": {
+          "message": { "type": "string" },
+          "Vacation": {
+            "type": "string",
+            "items": { "$ref": "#/components/schemas/Location" }
+          }
+        }
       }
     }
   }
 }
+
